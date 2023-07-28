@@ -23,6 +23,5 @@ class TestRes(Resource):
 
 api.add_resource(TestRes, '/api/v1/usns/cifra-ibsmb-gw/test/test-res')
 
-
 if __name__ == '__main__':
     app.run(debug=True)

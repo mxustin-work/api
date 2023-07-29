@@ -1,5 +1,5 @@
-name: Github Actions Demo 😎
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: ⬇️ Hosting on the VPS
+run-name: ${{ github.actor }} is hosting the project on the VPS 🚀
 
 on: [push]
 jobs:
@@ -17,3 +17,15 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install SSH client
+        run: sudo apt-get install sshpass
+      - name: Send files via SSH
+        run: >- 
+          sshpass -p ${{ secrets.API_HOST_SSH_API }} 
+          rsync -e "ssh -o StrictHostKeyChecking=no" -r ${{ github.workspace }}/* 
+          api@92.63.177.74:/home/api/api/

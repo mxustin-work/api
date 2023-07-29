@@ -19,10 +19,9 @@ jobs:
       - name: Send files via SSH
         run:
           echo "🚛 Sending files vie SSH"
-          >- 
-          sshpass -p ${{ secrets.API_HOST_SSH_API }} 
-          rsync -e "ssh -o StrictHostKeyChecking=no" -r ${{ github.workspace }}/* 
-          api@92.63.177.74:/home/api/api/ &&
+          sshpass -p ${{ secrets.API_HOST_SSH_API }} \ 
+          rsync -e "ssh -o StrictHostKeyChecking=no" -r ${{ github.workspace }}/* \ 
+          api@92.63.177.74:/home/api/api/ && \
           echo "✅ Successfully sent"
 
   Restart-service:

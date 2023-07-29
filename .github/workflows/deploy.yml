@@ -36,12 +36,9 @@ jobs:
         run:
           sudo apt-get install -y sshpass && echo "✅ Successfully installed"
 
-      - name: Prompt before Login as root
-        run: echo "🔓 Logging in as root"
-      - name: Login as root
-        run: sshpass -p ${{ secrets.API_HOST_SSH_ROOT }} ssh -o StrictHostKeyChecking=no root@92.63.177.74
-
       - name: Prompt before Restart service
         run: echo "🔄 Restarting API service"
       - name: Restart service
-        run: sshpass -i systemctl restart api && echo "✅ Successfully restarted"
+        run: >- 
+          sshpass -p ${{ secrets.API_HOST_SSH_ROOT }} ssh -t root@92.63.177.74 
+          "systemctl restart api"

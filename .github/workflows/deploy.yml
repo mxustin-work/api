@@ -44,4 +44,4 @@ jobs:
       - name: Prompt before Restart service
         run: echo "🔄 Restarting API service"
       - name: Restart service
-        run: systemctl restart api && echo "✅ Successfully restarted"
+        run: sshpass -i systemctl restart api && echo "✅ Successfully restarted"

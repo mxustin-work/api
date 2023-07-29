@@ -39,5 +39,4 @@ jobs:
       - name: Prompt before Restart service
         run: echo "🔄 Restarting API service"
       - name: Restart service
-        run: >- 
-          sshpass -p ${{ secrets.API_HOST_SSH_ROOT }} ssh -v -T root@92.63.177.74:/root "sudo systemctl restart api"
+        run: sshpass -p ${{ secrets.API_HOST_SSH_ROOT }} ssh root@92.63.177.74 "sudo systemctl restart api"

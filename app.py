@@ -16,7 +16,7 @@ class TestRes(Resource):
 
     def get(self):  # noqa
         return {
-            'message': 'Hello World!',
+            'message': '👋 Hello World!',
             'code': 200
         }
 

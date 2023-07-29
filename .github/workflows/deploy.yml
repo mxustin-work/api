@@ -30,9 +30,9 @@ jobs:
     needs: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Prompt before Restart
-        run: echo "👨‍🔧 Restarting service"
-      - name: ls -a via OPEN SSH Private Key
+      - name: Prompt before Restart API service
+        run: echo "👨‍🔧 Restarting API service"
+      - name: Restart API service
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: bash /root/restart-api.sh

@@ -21,7 +21,7 @@ class Hello(Resource):
         }
 
 
-api.add_resource(Hello, 'bank/api/v1/usns/cifra-ibsmb-gw/hello')
+api.add_resource(Hello, '/bank/api/v1/usns/cifra-ibsmb-gw/hello')
 
 if __name__ == '__main__':
     app.run(debug=True)

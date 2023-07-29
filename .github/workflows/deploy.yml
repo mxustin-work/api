@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        run: echo "👀 Checkout project code"
         uses: actions/checkout@v3
 
       - name: Install SSH client
@@ -28,7 +27,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: SSH into server
-        run: echo "🔐 Entering via SSH as root"
         uses: appleboy/ssh-action@master
         with:
           host: 92.63.177.74

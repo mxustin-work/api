@@ -6,35 +6,40 @@ jobs:
   Deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Prompt before Checkout
+        run: echo "⤵️ Checking out project code"
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Prompt before Install SSH client
+        run: echo "👨‍🔧 Installing SSH client"
       - name: Install SSH client
         run:
-          echo "👨‍🔧 Installing SSH client"
-          sudo apt-get install sshpass
-          echo "✅ Successfully installed"
+          sudo apt-get install sshpass && echo "✅ Successfully installed"
 
+      - name: Prompt before Send files via SSH
+        run: echo "➡️ Sending files vie SSH"
       - name: Send files via SSH
-        run:
-          echo "🚛 Sending files vie SSH"
-          sshpass -p ${{ secrets.API_HOST_SSH_API }} \ 
-          rsync -e "ssh -o StrictHostKeyChecking=no" -r ${{ github.workspace }}/* \ 
-          api@92.63.177.74:/home/api/api/ && \
+        run: >-
+          sshpass -p ${{ secrets.API_HOST_SSH_API }}  
+          rsync -e "ssh -o StrictHostKeyChecking=no" -r ${{ github.workspace }}/*  
+          api@92.63.177.74:/home/api/api/ && 
           echo "✅ Successfully sent"
 
   Restart-service:
     runs-on: ubuntu-latest
     steps:
-      - name: SSH into server
+      - name: Prompt before Enter into server vie SSH
+        run: echo "🔓 Entering into server vie SSH"
+      - name: Enter into server vie SSH
         uses: appleboy/ssh-action@master
         with:
           host: 92.63.177.74
           username: root
           password: ${{ secrets.API_HOST_SSH_ROOT }}
 
+      - name: Prompt before Restart service
+        run: echo "🔄 Restarting API service"
       - name: Restart service
         run:
-          echo "🔄 Restarting API service"
-          systemctl restart api
-          echo "✅ Successfully sent"
+          systemctl restart api && echo "✅ Successfully sent"

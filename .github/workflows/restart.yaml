@@ -1,0 +1,24 @@
+name: 🚀 Hosting on the VPS
+run-name: ${{ github.actor }} is hosting the project on the VPS 🚀
+
+on: [push]
+jobs:
+  Restart-service:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prompt before Install SSH client
+        run: echo "👨‍🔧 Installing SSH client"
+      - name: Install SSH client
+        run:
+          sudo apt-get install -y sshpass && echo "✅ Successfully installed"
+
+      - name: Prompt before Login as root
+        run: echo "🔓 Logging in as root"
+      - name: Login as root
+        run: sshpass -p ${{ secrets.API_HOST_SSH_ROOT }} ssh -o StrictHostKeyChecking=no root@92.63.177.74
+
+      - name: Prompt before Restart service
+        run: echo "🔄 Restarting API service"
+      - name: Restart service
+        run: systemctl restart api && echo "✅ Successfully restarted"

@@ -30,13 +30,12 @@ jobs:
     needs: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Prompt before Install SSH client
-        run: echo "👨‍🔧 Installing SSH client"
-      - name: Install SSH client
-        run:
-          sudo apt-get install -y sshpass && echo "✅ Successfully installed"
-
-      - name: Prompt before Restart service
-        run: echo "🔄 Restarting API service"
-      - name: Restart service
-        run: sshpass -p ${{ secrets.API_HOST_SSH_ROOT }} ssh root@92.63.177.74 "sudo systemctl restart api"
+      - name: Prompt before Restart
+        run: echo "👨‍🔧 Restarting service"
+      - name: ls -a via OPEN SSH Private Key
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: bash /root/restart-api.sh
+          host: 92.63.177.74
+          username: root
+          password: ${{ secrets.API_HOST_SSH_ROOT }}

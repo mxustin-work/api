@@ -42,4 +42,4 @@ jobs:
         run: echo "🔄 Restarting API service"
       - name: Restart service
         run:
-          systemctl restart api && echo "✅ Successfully sent"
+          sudo systemctl restart api && echo "✅ Successfully sent"

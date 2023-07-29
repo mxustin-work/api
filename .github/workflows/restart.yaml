@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is hosting the project on the VPS 🚀
 
 on: [push]
 jobs:
-  Restart-service:
+  Restart:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
